@@ -31,14 +31,23 @@ export class FormComponent implements OnInit {
 
   cargarCliente():void{
     this.activateRouter.params.subscribe(params => {
-      let id = params['id']
+      let id = params['id'];
       if(id){
         this.clienteService.getCliente(id)
         .subscribe( cliente => {
-          this.cliente = cliente
+          this.cliente = cliente;
         } )
       }
     })
+  }
+
+  update():void {
+    this.clienteService.update(this.cliente)
+    .subscribe( cliente => {
+      this.router.navigate(['/clientes']);
+      swal.fire('Cliente Actualizado', `Cliente ${cliente.nombre} Actualizado con exito`, 'success');
+    }
+    )
   }
 
 }

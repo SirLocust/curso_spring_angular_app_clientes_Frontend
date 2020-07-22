@@ -11,7 +11,7 @@
         Crear Cliente
       </button>
     </div>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" *ngIf="clientes?.length>0; else notClientes">
       <thead>
         <tr>
           <th>id</th>
@@ -31,8 +31,16 @@
           <td>
             <button type="button" name="button" [routerLink]="['/clientes/form', cliente.id]" class="btn btn-primary" >Editar</button>
           </td>
+          <td>
+            <button type="button" name="" id="" class="btn btn-danger" (click)='delete(cliente)' > X </button>
+          </td>
         </tr>
       </tbody>
     </table>
+    <ng-template #notClientes>
+      <div class="alert alert-info">
+        <p>no hay registros en la base de datos</p>
+      </div>
+    </ng-template>
   </div>
 </div>
