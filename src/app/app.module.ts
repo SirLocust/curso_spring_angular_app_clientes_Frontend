@@ -9,6 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { HttpClientModule} from '@angular/common/http';
+import { FormComponent } from './clientes/form.component';
+import { FormsModule  } from "@angular/forms";
+
 
 @NgModule({
   declarations: [
@@ -16,12 +19,14 @@ import { HttpClientModule} from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     DirectivaComponent,
-    ClientesComponent
+    ClientesComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     ClienteService
