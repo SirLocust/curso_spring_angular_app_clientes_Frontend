@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 export class FormComponent implements OnInit {
   cliente: Cliente = new Cliente();
   titulo: string = 'Crear Cliente';
+  private errors:string[];
   constructor(private clienteService: ClienteService, private router: Router , private activateRouter:ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -19,13 +20,19 @@ export class FormComponent implements OnInit {
   }
 
   create(): void {
-    this.clienteService.create(this.cliente).subscribe((cliente) => {
+    this.clienteService.create(this.cliente)
+      .subscribe((cliente) => {
       this.router.navigate(['/clientes']);
       swal.fire(
         'Nuevo Cliente',
         `cliente ${cliente.nombre} creado con exito`,
         'success'
-      );
+      ); 
+    
+      },
+      err => {
+        this.errors = err.error.errors as string[];
+        
     });
   }
 
@@ -46,8 +53,16 @@ export class FormComponent implements OnInit {
     .subscribe( cliente => {
       this.router.navigate(['/clientes']);
       swal.fire('Cliente Actualizado', `Cliente ${cliente.nombre} Actualizado con exito`, 'success');
+    },
+      err => {
+        this.errors = err.error.errors as string[];
+        
     }
     )
+  }
+
+  getErros():String[]{
+    return this.errors
   }
 
 }
